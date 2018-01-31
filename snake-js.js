@@ -767,6 +767,7 @@ function SnakeJS(parentElement, config) {
 	 * @param autoPlayFn A callback function which executes when any arrow key is pressed
 	 */
 	function InputInterface(pauseFn, resumeFn, autoPlayFn) {
+		var self = this;
 
 		var arrowKeys = [37, 38, 39, 40],	// Key codes for the arrow keys on a keyboard
 			listening = false,				// Listening right now for key strokes etc?
@@ -821,7 +822,7 @@ function SnakeJS(parentElement, config) {
 		};
 
 		var handleArrowKeyPress = function (event) {
-			handleArrowKeyPressByCode(event.keyCode);
+			self.handleArrowKeyPressByCode(event.keyCode);
 		};
 
 		this.handleArrowKeyPressByCode = function (keyCode) {

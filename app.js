@@ -14,11 +14,24 @@ document.addEventListener("DOMContentLoaded", function(){
 
 	// Create the game object. The settings object is NOT required.
 	// The parentElement however is required
-	var game = new SnakeJS(parentElement, settings);
+	var prophixShell = new SnakeJS(parentElement, settings);
 
     // game.move(37);//left
-     game.move(38);//up
+    // game.move(38);//up
     // game.move(39);//right
-    // game.move(40);//down
+	// game.move(40);//down
+
+	var lexDemo = new LexDemo(function(param){
+		if(!param)
+			return;
+
+		if(param.slots.Direction == "up"){
+			prophixShell.move(38);
+		}
+		else if(param.slots.Direction == "left"){
+			prophixShell.move(37);
+		}
+	})
 
 }, true);
+
