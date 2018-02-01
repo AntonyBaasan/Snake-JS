@@ -786,8 +786,8 @@ function SnakeJS(parentElement, config) {
 			if (!listening) {
 				window.addEventListener("keydown", handleKeyDown, true);
 				window.addEventListener("keypress", disableKeyPress, true);
-				window.addEventListener("blur", pauseFn, true);
-				window.addEventListener("focus", resumeFn, true);
+				// window.addEventListener("blur", pauseFn, true);
+				// window.addEventListener("focus", resumeFn, true);
 				listening = true;
 			}
 		};
@@ -797,8 +797,8 @@ function SnakeJS(parentElement, config) {
 			if (listening) {
 				window.removeEventListener("keydown", handleKeyDown, true);
 				window.removeEventListener("keypress", disableKeyPress, true);
-				window.removeEventListener("blur", pauseFn, true);
-				window.removeEventListener("focus", resumeFn, true);
+				// window.removeEventListener("blur", pauseFn, true);
+				// window.removeEventListener("focus", resumeFn, true);
 				listening = false;
 			}
 		};

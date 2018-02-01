@@ -1,4 +1,3 @@
-
 // Initialize the Amazon Cognito credentials provider
 AWS.config.region = 'us-east-1'; // Region
 AWS.config.credentials = new AWS.CognitoIdentityCredentials({
@@ -54,22 +53,6 @@ function pushChat(callBack) {
     return false;
 }
 
-function showRequest(daText) {
-    appendText(daText, 'userRequest');
-}
-
-function showError(daText) {
-    appendText(daText, 'lexError');
-}
-
-function appendText(daText, className) {
-    var conversationDiv = document.getElementById('conversation');
-    var requestPara = document.createElement("P");
-    requestPara.className = className;
-    requestPara.appendChild(document.createTextNode(daText));
-    conversationDiv.appendChild(requestPara);
-    conversationDiv.scrollTop = conversationDiv.scrollHeight;
-}
 
 function showResponse(lexResponse, callBack) {
     console.log(lexResponse);

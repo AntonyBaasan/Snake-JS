@@ -1,20 +1,22 @@
-// js func SnakeJS
-// 
-
-var prophixShell;
+var snakeGame;
 var fulFillmentCallBack = function (param) {
 	if (!param)
 		return;
 
 	if (param.slots.Direction == "up") {
-		prophixShell.move(38);
+		snakeGame.move(38);
 	}
 	else if (param.slots.Direction == "left") {
-		prophixShell.move(37);
+		snakeGame.move(37);
+	}
+	else if (param.slots.Direction == "down") {
+		snakeGame.move(40);
+	}
+	else if (param.slots.Direction == "right") {
+		snakeGame.move(39);
 	}
 };
 
-// If you are using jQuery, use < $(document).ready(function(){ ... }) > instead
 document.addEventListener("DOMContentLoaded", function () {
 	// set the focus to the input box
 	document.getElementById("wisdom").focus();
@@ -32,12 +34,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
 	// Create the game object. The settings object is NOT required.
 	// The parentElement however is required
-	prophixShell = new SnakeJS(parentElement, settings);
+	snakeGame = new SnakeJS(parentElement, settings);
 
-	// game.move(37);//left
-	// game.move(38);//up
-	// game.move(39);//right
-	// game.move(40);//down
 }, true);
 
 
