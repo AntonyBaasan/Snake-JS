@@ -57,40 +57,10 @@ function downsampleBuffer(buffer, rate, sampleRate) {
     return result;
 }
 
-function startUserMedia(stream) {
-    var input = audio_context.createMediaStreamSource(stream);
-    __log('Media stream created.');
-
-    recorder = new Recorder(input, { sampleRate: 16000 });
-    __log('Recorder initialised.');
-}
-
-window.onload = function init() {
-    try {
-        // webkit shim
-        window.AudioContext = window.AudioContext || window.webkitAudioContext;
-        navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia;
-        window.URL = window.URL || window.webkitURL;
-
-        audio_context = new AudioContext;
-        __log('Audio context set up.');
-        __log('navigator.getUserMedia ' + (navigator.getUserMedia ? 'available.' : 'not present!'));
-    } catch (e) {
-        alert('No web audio support in this browser!');
-    }
-
-    navigator.getUserMedia({ audio: true }, startUserMedia, function (e) {
-        __log('No live audio input: ' + e);
-    });
-};
-
 function __log(e, data) {
     console.log(e);
     // log.innerHTML += "\n" + e + " " + (data || '');
 }
-
-var audio_context;
-var recorder;
 
 function convertBlobToUrl(blob) {
     var url = URL.createObjectURL(blob);
@@ -109,19 +79,30 @@ function convertBlobToUrl(blob) {
     return au;
 }
 
-function showRequest(daText) {
-    appendText(daText, 'userRequest');
+function showRequest(text) {
+    appendText(text, 'userRequest');
 }
 
-function showError(daText) {
-    appendText(daText, 'lexError');
+function showError(text) {
+    appendText(text, 'lexError');
 }
 
-function appendText(daText, className) {
+function appendText(text, className) {
     var conversationDiv = document.getElementById('conversation');
     var requestPara = document.createElement("P");
     requestPara.className = className;
-    requestPara.appendChild(document.createTextNode(daText));
+    requestPara.appendChild(document.createTextNode(text));
     conversationDiv.appendChild(requestPara);
     conversationDiv.scrollTop = conversationDiv.scrollHeight;
+}
+
+function playAudioResponse(audioStream) {
+    if (audioStream && audioStream.length > 0) {
+        var uInt8Array = new Uint8Array(audioStream);
+        var arrayBuffer = uInt8Array.buffer;
+        var blob = new Blob([arrayBuffer]);
+
+        var audioElement = convertBlobToUrl(blob);
+        audioElement.play();
+    }
 }

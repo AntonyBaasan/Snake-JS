@@ -38,6 +38,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
 }, true);
 
+function onChatClick(){
+	event.preventDefault();
+	event.stopPropagation();
+	lexApp.sendChat(fulFillmentCallBack);
+	return false;
+}
+
 
 
 
